@@ -156,6 +156,97 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Norm-and-Sparsity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/27/Norm-and-Sparsity/">Norm and Sparsity</a>
+    </h1>
+  
+
+        
+        <a href="/2020/09/27/Norm-and-Sparsity/" class="archive-article-date">
+  	<time datetime="2020-09-27T06:34:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>original: <a target="_blank" rel="noopener" href="https://stats.stackexchange.com/a/159379">https://stats.stackexchange.com/a/159379</a></p>
+<p>With a sparse model, we think of a model where many of the weights are 0. Let us therefore reason about how L1-regularization is more likely to create 0-weights.</p>
+<p>Consider a model consisting of the weights $(w_1,w_2,…,w_m)$.</p>
+<p>With L1 regularization, you penalize the model by a loss function $L_1(w) = Σ_i|w_i|$.</p>
+<p>With L2-regularization, you penalize the model by a loss function $L_2(w) = \frac{1}{2}Σ_iw^2_i$</p>
+<p>If using gradient descent, you will iteratively make the weights change in the opposite direction of the gradient with a step size $\eta$ multiplied with the gradient. This means that a more steep gradient will make us take a larger step, while a more flat gradient will make us take a smaller step. Let us look at the gradients (subgradient in case of L1):</p>
+<p>dL1(w)dw=sign(w)dL1(w)dw=sign(w), where sign(w)=(w1|w1|,w2|w2|,…,wm|wm|)sign(w)=(w1|w1|,w2|w2|,…,wm|wm|)</p>
+<p>dL2(w)dw=wdL2(w)dw=w</p>
+<p>If we plot the loss function and it’s derivative for a model consisting of just a single parameter, it looks like this for L1:</p>
+<p><img src="https://i.stack.imgur.com/cmWO0.png" alt="enter image description here"></p>
+<p>And like this for L2:</p>
+<p><a target="_blank" rel="noopener" href="https://i.stack.imgur.com/Mkclz.png"><img src="https://i.stack.imgur.com/Mkclz.png" alt="enter image description here"></a></p>
+<p>Notice that for L1L1, the gradient is either 1 or -1, except for when w1=0w1=0. That means that L1-regularization will move any weight towards 0 with the same step size, regardless the weight’s value. In contrast, you can see that the L2L2 gradient is linearly decreasing towards 0 as the weight goes towards 0. Therefore, L2-regularization will also move any weight towards 0, but it will take smaller and smaller steps as a weight approaches 0.</p>
+<p>Try to imagine that you start with a model with w1=5w1=5 and using η=12η=12. In the following picture, you can see how gradient descent using L1-regularization makes 10 of the updates w1:=w1−η⋅dL1(w)dw=w1−12⋅1w1:=w1−η⋅dL1(w)dw=w1−12⋅1, until reaching a model with w1=0w1=0:</p>
+<p><img src="https://i.stack.imgur.com/XmtF2.png" alt="enter image description here"></p>
+<p>In constrast, with L2-regularization where η=12η=12, the gradient is w1w1, causing every step to be only halfway towards 0. That is, we make the update w1:=w1−η⋅dL2(w)dw=w1−12⋅w1w1:=w1−η⋅dL2(w)dw=w1−12⋅w1 Therefore, the model never reaches a weight of 0, regardless of how many steps we take:</p>
+<p><img src="https://i.stack.imgur.com/jlQYp.png" alt="enter image description here"></p>
+<p>Note that L2-regularization <strong>can</strong> make a weight reach zero if the step size ηη is so high that it reaches zero in a single step. Even if L2-regularization on its own over or undershoots 0, it can still reach a weight of 0 when used together with an objective function that tries to minimize the error of the model with respect to the weights. In that case, finding the best weights of the model is a trade-off between regularizing (having small weights) and minimizing loss (fitting the training data), and the result of that trade-off can be that the best value for some weights are 0.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Concepts</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/27/Norm-and-Sparsity/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Bilinear-Interpolation" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
